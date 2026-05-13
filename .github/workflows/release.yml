@@ -20,6 +20,9 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Configure npm for OIDC publishing
+        run: echo "registry=https://registry.npmjs.org/" > $NPM_CONFIG_USERCONFIG
+
       - uses: gittools/actions/gitversion/setup@v3.0.0
         with:
           versionSpec: '5.x'
