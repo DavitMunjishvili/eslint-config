@@ -18,16 +18,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-          package-manager-cache: false
-          token: ''
-
-      - name: Upgrade npm for OIDC trusted publishing support
-        run: npm install -g npm@latest
-
-      - name: Remove auth token to allow OIDC
-        run: npm config delete //registry.npmjs.org/:_authToken
 
       - name: Debug environment
         run: |
@@ -69,3 +61,5 @@ jobs:
       - name: Publish to npm
         if: steps.check.outputs.skip == 'false'
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ''
