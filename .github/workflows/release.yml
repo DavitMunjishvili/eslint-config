@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,9 +20,8 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
 
-      - name: Configure npm for OIDC publishing
-        run: npm config delete //registry.npmjs.org/:_authToken
 
       - uses: gittools/actions/gitversion/setup@v3.0.0
         with:
@@ -49,4 +49,4 @@ jobs:
 
       - name: Publish to npm
         if: steps.check.outputs.skip == 'false'
-        run: npm publish --provenance --access public
+        run: npm publish --access public
