@@ -21,19 +21,6 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Debug environment
-        run: |
-          echo "=== npm version ==="
-          npm --version
-          echo "=== node version ==="
-          node --version
-          echo "=== npm config ==="
-          cat $NPM_CONFIG_USERCONFIG || echo "(empty or missing)"
-          echo "=== NODE_AUTH_TOKEN set ==="
-          [ -n "$NODE_AUTH_TOKEN" ] && echo "yes (non-empty)" || echo "no (empty or unset)"
-          echo "=== OIDC available ==="
-          [ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ] && echo "yes" || echo "no"
-
       - uses: gittools/actions/gitversion/setup@v3.0.0
         with:
           versionSpec: '5.x'
