@@ -21,7 +21,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Configure npm for OIDC publishing
-        run: echo "registry=https://registry.npmjs.org/" > $NPM_CONFIG_USERCONFIG
+        run: npm config delete //registry.npmjs.org/:_authToken
 
       - uses: gittools/actions/gitversion/setup@v3.0.0
         with:
