@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - uses: gittools/actions/gitversion/setup@v3.0.0
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v3.0.0
+
+      - name: Check if version already published
+        id: check
+        run: |
+          VERSION=${{ steps.gitversion.outputs.majorMinorPatch }}
+          if npm view @davitmunjishvili/eslint-config@$VERSION > /dev/null 2>&1; then
+            echo "Version $VERSION already published, skipping"
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "Publishing version $VERSION"
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set package version
+        if: steps.check.outputs.skip == 'false'
+        run: npm version ${{ steps.gitversion.outputs.majorMinorPatch }} --no-git-tag-version
+
+      - name: Publish to npm
+        if: steps.check.outputs.skip == 'false'
+        run: npm publish --provenance --access public
