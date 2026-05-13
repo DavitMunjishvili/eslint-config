@@ -1,0 +1,53 @@
+{
+  "name": "@davitmunjishvili/eslint-config",
+  "version": "0.1.0",
+  "description": "Shared ESLint flat config for React + TypeScript projects",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./base": "./src/configs/base.js",
+    "./react": "./src/configs/react.js",
+    "./rules/javascript": "./src/rules/javascript.js",
+    "./rules/typescript": "./src/rules/typescript.js",
+    "./rules/imports": "./src/rules/imports.js",
+    "./rules/node": "./src/rules/node.js",
+    "./rules/stylistic": "./src/rules/stylistic.js",
+    "./rules/react": "./src/rules/react.js"
+  },
+  "files": [
+    "src"
+  ],
+  "author": "Davit Munjishvili",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavitMunjishvili/eslint-config.git"
+  },
+  "homepage": "https://github.com/DavitMunjishvili/eslint-config#readme",
+  "bugs": {
+    "url": "https://github.com/DavitMunjishvili/eslint-config/issues"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-config",
+    "react",
+    "typescript"
+  ],
+  "dependencies": {
+    "@stylistic/eslint-plugin": "^2.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import-x": "^4.0.0",
+    "eslint-plugin-n": "^17.0.0",
+    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "globals": "^15.0.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
